@@ -2,7 +2,7 @@ import React from 'react'
 import {X} from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useChatStore } from '../store/useChatStore'
-import Avatar  from '../assets/avatar.png'
+
 const ChatHeader = () => {
   const {selectedUser,setSelectedUser} = useChatStore();
   const {onlineUsers} = useAuthStore();

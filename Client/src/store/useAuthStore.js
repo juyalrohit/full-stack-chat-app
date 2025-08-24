@@ -32,7 +32,7 @@ export const useAuthStore = create((set,get)=>({
     },
 
     signup: async (data) => {
-    set({ isSigningUp: true });
+    set({ isSigninUp: true });
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
@@ -40,9 +40,9 @@ export const useAuthStore = create((set,get)=>({
       get().connectSocket();
       
     } catch (error) {
-      toast.error(error.response.data.mess);
+      toast.error(error.response.data.message);
     } finally {
-      set({ isSigningUp: false });
+      set({ isSigninUp: false });
     }
   },
   logout: async()=>{
