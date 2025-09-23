@@ -53,7 +53,7 @@ const ChatContainer = () => {
               <div className='chat-image avatar'>
                 <div className='size-10 rounded-full border'>
                   
-                  <img src={messages.senderId===authUser._id ? authUser.profilePic || Avatar :selectedUser.profilePic || Avatar} alt="" />
+                  <img src={messages.senderId===authUser._id ? authUser.profilePic || 'https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png' : selectedUser.profilePic || 'https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png'} alt="" />
                   
 
                 </div>

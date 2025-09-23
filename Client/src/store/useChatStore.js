@@ -9,8 +9,12 @@ export const useChatStore = create((set,get)=>({
     selectedUser : null,
     isUserLoading : false,
     isMessageLoading : false,
+    typingUser : null,
 
-
+    setTypingUser : (userId)=>{
+        set({typingUser : userId})
+    },
+    
     getUsers: async () => {
     set({ isUsersLoading: true });
     try {
@@ -53,6 +57,7 @@ export const useChatStore = create((set,get)=>({
     if(!selectedUser) return;
 
     const socket = useAuthStore.getState().socket;
+    
     socket.on('newMessage',(newMessage)=>{
       const isMessageSentFromSelectedUser = newMessage.senderId===selectedUser._id;
       if(!isMessageSentFromSelectedUser) return;
@@ -65,7 +70,7 @@ export const useChatStore = create((set,get)=>({
 
   },
 
-    unsubscribeFromMessages : ()=>{
+   unsubscribeFromMessages : ()=>{
      const socket = useAuthStore.getState().socket;
      socket.off("newMessage")
   }

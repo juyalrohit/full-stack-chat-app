@@ -3,18 +3,21 @@ import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
+import Avatar from '../assets/Avatar.png'
 
 
 const Sidebar = () => {
-  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
+  const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading,typingUser,setTypingUser} = useChatStore();
 
   const { onlineUsers } = useAuthStore();
-
+  
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
+  
 
   const filteredUsers = showOnlineOnly
     ? users.filter((user) => onlineUsers.includes(user._id))
@@ -22,8 +25,8 @@ const Sidebar = () => {
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
-  console.log("Online User",onlineUsers)
-  console.log("total User",users);
+  // console.log("Online User",onlineUsers)
+  // console.log("total User",users);
 
   
   return (
@@ -61,7 +64,7 @@ const Sidebar = () => {
           >
             <div className="relative mx-auto lg:mx-0">
               <img
-                src={user.profilePic || 'https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png'}
+                src={user.profilePic || Avatar}
                 alt={user.name}
                 className="size-12 object-cover rounded-full"
               />
@@ -78,7 +81,7 @@ const Sidebar = () => {
             <div className="hidden lg:block text-left min-w-0">
               <div className="font-medium truncate">{user.fullname}</div>
               <div className="text-sm text-zinc-400">
-                {onlineUsers.includes(user._id) ? "Online" : "Offline"}
+                {onlineUsers.includes(user._id) ? (typingUser===user._id ? <span className="text-green-400">typing</span> : "Online") : "Offline"}
               </div>
             </div>
           </button>

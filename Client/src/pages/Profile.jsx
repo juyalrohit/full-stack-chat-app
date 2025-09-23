@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Camera, Mail, User } from "lucide-react";
+import Avatar from '../assets/avatar.png'
 
 
 
@@ -37,7 +38,7 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img
-                src={selectedImg || authUser.profilePic || "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png" }
+                src={selectedImg || authUser.profilePic || Avatar }
                 alt="Profile"
                 className="size-32 rounded-full object-cover border-4 "
               />
