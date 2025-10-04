@@ -32,14 +32,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api/auth',AuthRouter);
 app.use('/api/messages',MessageRouter);
 
-if(process.env.NODE_ENV==="production"){
-    app.use(express.static(path.join(__dirname,"./Client/dist")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "./Client/dist")));
 
-    app.get('/*',(req,res)=>{
-        res.sendFile(path.join(__dirname,"./Client","dist","index.html"));
-    })
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./Client/dist/index.html"));
+  });
 }
-
 server.listen(PORT,()=>{
     console.log(`Server Started on Port ${PORT}`);
     connectDB()
