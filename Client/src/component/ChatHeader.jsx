@@ -2,8 +2,6 @@ import React, { useEffect,useState } from 'react'
 import {X} from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useChatStore } from '../store/useChatStore'
-import Avatar from '../assets/Avatar.png'
-
 const ChatHeader = () => {
   const {selectedUser,setSelectedUser,typingUser,setTypingUser} = useChatStore();
   const {onlineUsers,socket} = useAuthStore();
@@ -12,7 +10,6 @@ const ChatHeader = () => {
 
   useEffect(()=>{
     socket.on("typingStatus",({userId,isTyping})=>{
-         console.log("hii");
          if(isTyping){
             setTypingUser(userId)
          }
@@ -28,8 +25,6 @@ const ChatHeader = () => {
   },[socket]);
 
 
-  console.log(typingUser);
-  console.log("Or ye hai selectec user", selectedUser._id)
 
 
 
@@ -40,7 +35,7 @@ const ChatHeader = () => {
                 {/* Avtar */}
                 <div className='avatar'>
                     <div className='size-10 rounded-full relative'>
-                        <img src={selectedUser.profilePic || Avatar} alt={selectedUser.fullname} />
+                        <img src={selectedUser.profilePic || "avatar.png"} alt={selectedUser.fullname} />
                     </div>
 
                 </div>
