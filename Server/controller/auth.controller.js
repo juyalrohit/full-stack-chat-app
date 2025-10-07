@@ -64,11 +64,6 @@ export const login = async(req,res)=>{
        if(!email || !password){
          res.status(400).json({message:"All fields are required"});
        }
-
-       const hashPassword = await bcrypt.hash(password,10);
-
-     
-
         
         const user = await userModel.findOne({email});
 
@@ -118,12 +113,9 @@ export const updateProfile = async(req,res)=>{
         }
 
       const uploadProfileResponse =   await cloudinary.uploader.upload(profilePic);
-      console.log(uploadProfileResponse)
       const updatedUser = await userModel.findByIdAndUpdate(userId,{profilePic:uploadProfileResponse.secure_url},{new:true});
 
        res.status(200).json(updatedUser)
-
-
   
     } catch (error) {
         console.log("error in update profile:",error);
